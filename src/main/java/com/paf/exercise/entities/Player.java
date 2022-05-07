@@ -1,18 +1,34 @@
-package com.paf.exercise.model;
+package com.paf.exercise.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Id;
 
 @Entity
+@Table(name = "players")
 public class Player implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
-    public Long id;
-    public String player_name;
+    private Long id;
+    @Column(name = "name")
+    private String player_name;
 
-    public Player(){}
+    @ManyToMany(mappedBy = "players", fetch = FetchType.LAZY)
+    private Set<Tournament> tournaments;
+
+    public Player() {
+    }
+
+    public Set<Tournament> getTournaments() {
+        return tournaments;
+    }
+
+    public void setTournaments(Set<Tournament> tournaments) {
+        this.tournaments = tournaments;
+    }
 
     public Player(String player_name) {
         this.player_name = player_name;

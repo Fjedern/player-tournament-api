@@ -1,6 +1,17 @@
 angular.module('exercise', [])
     .run(function($rootScope, $http) {
 
+        $rootScope.getTestTournaments = function() {
+            $http.get('/tournaments', {
+            }).then(function(result) {
+                $rootScope.tournaments = result.data;
+                console.log($rootScope.tournaments);
+                // angular.forEach($rootScope.tournaments, function(tournament) {
+                //     $rootScope.getPlayersInTournament(tournament.tournament_id);
+                // });
+            });
+        };
+
         $rootScope.getTournaments = function() {
             $http.get('/exercise', {
                 params: {

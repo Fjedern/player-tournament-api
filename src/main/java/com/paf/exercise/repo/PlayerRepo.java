@@ -1,5 +1,5 @@
 package com.paf.exercise.repo;
-import com.paf.exercise.model.Player;
+import com.paf.exercise.entities.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

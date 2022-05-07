@@ -1,14 +1,15 @@
 package com.paf.exercise.service;
 
+import com.paf.exercise.entities.Player;
 import com.paf.exercise.exception.TournamentNotFoundException;
-import com.paf.exercise.model.Tournament;
+import com.paf.exercise.entities.Tournament;
 import com.paf.exercise.repo.TournamentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class TournamentService {
@@ -37,6 +38,14 @@ public class TournamentService {
 
     public void deleteTournament(Long id){
         tournamentRepo.deleteTournamentById(id);
+    }
+
+    public void addPlayerToTournament(Long tournamentId, Set<Player> players) {
+        Optional<Tournament> tournamentOptional = tournamentRepo.findById(tournamentId);
+        Tournament tournament = tournamentOptional.get();
+        players.addAll(tournament.getPlayers());
+        tournament.setPlayers(players);
+        tournamentRepo.save(tournament);
     }
 }
 

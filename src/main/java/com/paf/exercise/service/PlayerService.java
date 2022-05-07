@@ -1,6 +1,6 @@
 package com.paf.exercise.service;
 import com.paf.exercise.exception.PlayerNotFoundException;
-import com.paf.exercise.model.Player;
+import com.paf.exercise.entities.Player;
 import com.paf.exercise.repo.PlayerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,12 +1,14 @@
 package com.paf.exercise.controllers;
+import com.paf.exercise.entities.Player;
 import com.paf.exercise.exception.TournamentNotFoundException;
-import com.paf.exercise.model.Tournament;
+import com.paf.exercise.entities.Tournament;
 import com.paf.exercise.service.TournamentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/tournaments")
@@ -44,6 +46,12 @@ public class TournamentController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteTournament(@PathVariable("id") Long id) {
         tournamentService.deleteTournament(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/addPlayerToTournament/{tournamentId}")
+    public ResponseEntity<?> addPlayerToTournament(@PathVariable Long tournamentId, @RequestBody Set<Player> players) {
+        tournamentService.addPlayerToTournament(tournamentId, players);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
