@@ -1,7 +1,7 @@
-package com.paf.exercise.service;
-import com.paf.exercise.exception.PlayerNotFoundException;
+package com.paf.exercise.services;
+import com.paf.exercise.exceptions.PlayerNotFoundException;
 import com.paf.exercise.entities.Player;
-import com.paf.exercise.repo.PlayerRepo;
+import com.paf.exercise.repos.PlayerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,11 +28,11 @@ public class PlayerService {
         return playerRepo.save(player);
     }
 
-    public Player findPlayerById(Long id) throws PlayerNotFoundException {
+    public Player findPlayerById(int id) throws PlayerNotFoundException {
         return playerRepo.findPlayerById(id).orElseThrow(() -> new PlayerNotFoundException("Player by id " + id + " was not found"));
     }
 
-    public void deletePlayer(Long id){
+    public void deletePlayer(int id){
         playerRepo.deletePlayerById(id);
     }
 }

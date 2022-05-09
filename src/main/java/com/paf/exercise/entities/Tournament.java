@@ -2,7 +2,6 @@ package com.paf.exercise.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -11,11 +10,11 @@ public class Tournament implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
-    private Long id;
+    private int id;
     @Column(name = "name")
     private String tournament_name;
     @Column(name = "prize")
-    private int prize;
+    private int tournament_prize;
 
 
     @ManyToMany
@@ -25,11 +24,12 @@ public class Tournament implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "player_id"))
     private Set<Player> players;
 
-    public Tournament(){}
+    public Tournament() {
+    }
 
     public Tournament(String tournament_name, int prize) {
         this.tournament_name = tournament_name;
-        this.prize = prize;
+        this.tournament_prize = prize;
     }
 
     public Set<Player> getPlayers() {
@@ -40,11 +40,15 @@ public class Tournament implements Serializable {
         this.players = players;
     }
 
-    public Long getId() {
+    public void addPlayerToList(Player player) {
+        players.add(player);
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -56,12 +60,12 @@ public class Tournament implements Serializable {
         this.tournament_name = tournament_name;
     }
 
-    public int getPrize() {
-        return prize;
+    public int getTournament_prize() {
+        return tournament_prize;
     }
 
-    public void setPrize(int prize) {
-        this.prize = prize;
+    public void setTournament_prize(int tournament_prize) {
+        this.tournament_prize = tournament_prize;
     }
 
     @Override
@@ -69,7 +73,7 @@ public class Tournament implements Serializable {
         return "Tournament{" +
                 "tournament_id=" + id +
                 ", tournament_name='" + tournament_name + '\'' +
-                ", tournament_prize=" + prize +
+                ", tournament_prize=" + tournament_prize +
                 '}';
     }
 }

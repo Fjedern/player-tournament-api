@@ -12,33 +12,22 @@ public class Player implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
-    private Long id;
+    private int id;
     @Column(name = "name")
     private String player_name;
 
-    @ManyToMany(mappedBy = "players", fetch = FetchType.LAZY)
-    private Set<Tournament> tournaments;
-
     public Player() {
-    }
-
-    public Set<Tournament> getTournaments() {
-        return tournaments;
-    }
-
-    public void setTournaments(Set<Tournament> tournaments) {
-        this.tournaments = tournaments;
     }
 
     public Player(String player_name) {
         this.player_name = player_name;
     }
 
-    public Long getPlayer_id() {
+    public int getPlayer_id() {
         return id;
     }
 
-    public void setPlayer_id(Long player_id) {
+    public void setPlayer_id(int player_id) {
         this.id = player_id;
     }
 

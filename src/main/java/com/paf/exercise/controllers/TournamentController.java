@@ -1,14 +1,12 @@
 package com.paf.exercise.controllers;
-import com.paf.exercise.entities.Player;
-import com.paf.exercise.exception.TournamentNotFoundException;
+import com.paf.exercise.exceptions.TournamentNotFoundException;
 import com.paf.exercise.entities.Tournament;
-import com.paf.exercise.service.TournamentService;
+import com.paf.exercise.services.TournamentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/tournaments")
@@ -26,7 +24,7 @@ public class TournamentController {
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Tournament> getTournamentById(@PathVariable("id") Long id) throws TournamentNotFoundException {
+    public ResponseEntity<Tournament> getTournamentById(@PathVariable("id") int id) throws TournamentNotFoundException {
         Tournament tournament = tournamentService.findTournamentById(id);
         return new ResponseEntity<>(tournament, HttpStatus.OK);
     }
@@ -44,14 +42,14 @@ public class TournamentController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteTournament(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deleteTournament(@PathVariable("id") int id) {
         tournamentService.deleteTournament(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/addPlayerToTournament/{tournamentId}")
-    public ResponseEntity<?> addPlayerToTournament(@PathVariable Long tournamentId, @RequestBody Set<Player> players) {
-        tournamentService.addPlayerToTournament(tournamentId, players);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PutMapping("/addPlayerToTournament/{tournamentId}/{playerId}")
+    public ResponseEntity<?> addPlayerToTournament(@PathVariable int tournamentId, @PathVariable int playerId) {
+        Tournament updateTournament = tournamentService.addPlayerToTournament(tournamentId, playerId);
+        return new ResponseEntity<>(updateTournament, HttpStatus.OK);
     }
 }
