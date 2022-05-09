@@ -1,0 +1,5 @@
+ Tasks I did not get done
+
+ TODO LIST
+ - write unit- and integration- tests.
+ - update frontend with my new backend.
