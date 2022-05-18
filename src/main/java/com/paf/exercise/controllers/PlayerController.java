@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.paf.exercise.exceptions.PlayerNotFoundException;
 import com.paf.exercise.entities.Player;
 import com.paf.exercise.services.PlayerService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,5 +48,10 @@ public class PlayerController {
     public ResponseEntity<?> deletePlayer(@PathVariable("id") int id) {
         playerService.deletePlayer(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    public static class PlayerDTO {
+        Integer id;
+        String player_name;
     }
 }
